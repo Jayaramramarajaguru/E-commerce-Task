@@ -26,10 +26,17 @@ const AppRoutes = () => {
 
   return (
     <Routes>
+<<<<<<< HEAD
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/home" element={<Home />} />
+=======
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/" element={<Home />} />
+>>>>>>> 4826aa4af46ba12daac8fab1faa11bf160fcfe2c
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/products" element={<Products />} />
 
