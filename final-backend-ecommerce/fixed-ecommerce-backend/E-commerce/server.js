@@ -28,7 +28,7 @@ app.use(express.json());
 
 // ✅ Routes (IMPORTANT FIX)
 app.use("/api/auth", require("./routes/authroute"));
-app.use("/api/products", require("./routes/productroutes"));
+app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/users", require("./routes/userroute"));
 app.use("/api/cart", cartRoutes);
 
