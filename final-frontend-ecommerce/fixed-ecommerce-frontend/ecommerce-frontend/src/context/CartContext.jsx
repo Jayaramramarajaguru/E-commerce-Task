@@ -1,13 +1,15 @@
+import API from "../services/api";
+
 import React, {
   createContext,
   useReducer,
   useEffect,
 } from "react";
 
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const CartContext = createContext();
+
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "SET_CART":
@@ -22,7 +24,7 @@ const cartReducer = (state, action) => {
 };
 
 export const CartProvider = ({ children }) => {
-const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const [cart, dispatch] = useReducer(cartReducer, {
     items: [],
@@ -31,9 +33,7 @@ const navigate=useNavigate();
   // FETCH CART
   const fetchCart = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:4000/api/cart"
-      );
+      const res = await API.get("/cart");
 
       dispatch({
         type: "SET_CART",
@@ -44,17 +44,16 @@ const navigate=useNavigate();
     }
   };
 
-const addToCart = async (product) => {
-  try {
-    console.log("PRODUCT", product);
+  // ADD TO CART
+  const addToCart = async (product) => {
+    try {
+      console.log("PRODUCT", product);
 
-    await axios.post(
-      "http://localhost:4000/api/cart",
-      {
+      await API.post("/cart", {
         productId: product._id,
 
         title: product.title,
-        
+
         image: product.image,
 
         description: product.description,
@@ -62,26 +61,24 @@ const addToCart = async (product) => {
         price: product.price,
 
         qty: 1,
-      }
-    );
+      });
 
-    fetchCart();
+      fetchCart();
 
-    alert("Added To Cart");
-    navigate('/cart')
-  } catch (error) {
-    console.log(
-      error.response?.data || error
-    );
-  }
-};
+      alert("Added To Cart");
+
+      navigate("/cart");
+    } catch (error) {
+      console.log(
+        error.response?.data || error
+      );
+    }
+  };
 
   // REMOVE FROM CART
   const removeFromCart = async (id) => {
     try {
-      await axios.delete(
-        `http://localhost:4000/api/cart/${id}`
-      );
+      await API.delete(`/cart/${id}`);
 
       fetchCart();
     } catch (error) {
