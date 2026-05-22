@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import axios from "axios";
+
+import API from "../services/api";
 
 import CartContext from "../context/CartContext";
 
@@ -12,18 +13,15 @@ const Products = () => {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:4000/api/products"
-      );
+const fetchProducts = async () => {
+  try {
+    const res = await API.get("/products");
 
-      setProducts(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+    setProducts(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
       {products.map((product) => (
