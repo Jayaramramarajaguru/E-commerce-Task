@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
@@ -30,36 +29,3 @@ const userSchema = new mongoose.Schema(
 
 module.exports =
   mongoose.models.User || mongoose.model("User", userSchema);
-=======
-const mongoose = require("mongoose");
-
-const userSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      select: false,
-    },
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",   // FIXED: sensible default
-    },
-  },
-  { timestamps: true }
-);
-
-module.exports =
-  mongoose.models.User || mongoose.model("User", userSchema);
->>>>>>> 4826aa4af46ba12daac8fab1faa11bf160fcfe2c
